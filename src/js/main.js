@@ -12,4 +12,6 @@ $('div').click(function() {
 
 // console.log($('.some').closest('.findmedsg').addClass('fff'));
 
-console.log($('.more').eq(0).siblings());
+$('button').fadeIn(1800);
+
+

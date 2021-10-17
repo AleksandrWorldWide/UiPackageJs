@@ -223,6 +223,57 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.find = function (selecto
   return this;
 };
 
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.closest = function (selector) {
+  let counter = 0;
+
+  for (let i = 0; i < this.length; i++) {
+    if (this[i].closest(selector) === null) {
+      return this;
+    }
+
+    this[i] = this[i].closest(selector);
+    counter++;
+  }
+
+  const objLength = Object.assign({}, this);
+
+  for (; counter < objLength; counter++) {
+    delete this[counter];
+  }
+
+  return this;
+};
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.siblings = function () {
+  let numberOfItems = 0;
+  let counter = 0;
+  const copyObj = Object.assign({}, this);
+
+  for (let i = 0; i < copyObj.length; i++) {
+    const arr = copyObj[i].parentNode.children;
+
+    for (let j = 0; j < arr.length; j++) {
+      if (copyObj[i] === arr[j]) {
+        continue;
+      }
+
+      this[counter] = arr[j];
+      counter++;
+    }
+
+    numberOfItems += arr.length - 1;
+  }
+
+  this.length = numberOfItems;
+  const objLength = Object.assign({}, this);
+
+  for (; numberOfItems < objLength; numberOfItems++) {
+    delete this[numberOfItems];
+  }
+
+  return this;
+};
+
 /***/ }),
 
 /***/ "./src/js/lib/modules/classes.js":
@@ -239,7 +290,11 @@ __webpack_require__.r(__webpack_exports__);
 
 _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.addClass = function (...classNames) {
   for (let i = 0; i < this.length; i++) {
-    this[i].classList.add(...classNames);
+    if (!this[i]) {
+      continue;
+    } else {
+      this[i].classList.add(...classNames);
+    }
   }
 
   return this;
@@ -387,8 +442,10 @@ $('button').click(function () {
 });
 $('div').click(function () {
   console.log($(this).index());
-});
-console.log($('div').eq(2).find('.some'));
+}); // console.log($('div').eq(2).find('.some'));
+// console.log($('.some').closest('.findmedsg').addClass('fff'));
+
+console.log($('.more').eq(0).siblings());
 
 /***/ })
 

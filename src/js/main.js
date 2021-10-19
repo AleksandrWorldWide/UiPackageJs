@@ -13,15 +13,15 @@ $('button').eq(2).on('click', () => {
 	$('.w-500').fadeToggle(800);
 });
 
-$('.wrap').html(`
-	<div class="dropdown">
-		<button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton">Dropdown button</button>
-		<div class="dropdown-menu" data-toggle-id='dropdownMenuButton'>
-			<a href="" class="dropdown-item">press 1</a>
-			<a href="" class="dropdown-item">press 2</a>
-			<a href="" class="dropdown-item">press 3</a>
-		</div>
-	</div>
-	`);
+// $('.wrap').html(`
+// 	<div class="dropdown">
+// 		<button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton">Dropdown button</button>
+// 		<div class="dropdown-menu" data-toggle-id='dropdownMenuButton'>
+// 			<a href="" class="dropdown-item">press 1</a>
+// 			<a href="" class="dropdown-item">press 2</a>
+// 			<a href="" class="dropdown-item">press 3</a>
+// 		</div>
+// 	</div>
+// 	`);
 
-	$('.dropdown-toggle').dropdown();
+// 	$('.dropdown-toggle').dropdown();

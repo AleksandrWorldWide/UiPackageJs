@@ -25,3 +25,28 @@ $('button').eq(2).on('click', () => {
 // 	`);
 
 // 	$('.dropdown-toggle').dropdown();
+
+$('#trigger').click(() => $('#trigger').createModal({
+	text: {
+		title: 'modal title',
+		body: 'modal body'
+	},
+	btns: {
+		count: 2,
+		settings: [
+			[
+				'Close',
+				['btn-danger', 'mr-10'],
+				true
+			],
+			[
+				'Save changes',
+				['btn-success'],
+				false,
+				() => {
+					alert('complete');
+				}
+			]
+		]
+	}
+}));

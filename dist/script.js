@@ -86,17 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/browser-sync/dist/index.js":
-/*!*************************************************!*\
-  !*** ./node_modules/browser-sync/dist/index.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-throw new Error("Module parse failed: Unexpected character '#' (1:0)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n> #! /usr/bin/env node\n| \"use strict\";\n| /**");
-
-/***/ }),
-
 /***/ "./src/js/lib/components/dropdown.js":
 /*!*******************************************!*\
   !*** ./src/js/lib/components/dropdown.js ***!
@@ -131,40 +120,44 @@ Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.dropdown-toggle').dropdo
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var browser_sync__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! browser-sync */ "./node_modules/browser-sync/dist/index.js");
-/* harmony import */ var browser_sync__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(browser_sync__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
 
 
-
-_core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.modal = function () {
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.modal = function (created) {
   for (let i = 0; i < this.length; i++) {
     const target = this[i].getAttribute('data-target');
-    Object(_core__WEBPACK_IMPORTED_MODULE_1__["default"])(this[i]).click(e => {
+    Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).click(e => {
       e.preventDefault();
-      Object(_core__WEBPACK_IMPORTED_MODULE_1__["default"])(target).fadeIn(500);
+      Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(target).fadeIn(500);
       document.body.style.overflow = 'hidden';
     });
-  }
+    const closeElements = document.querySelectorAll(`${target} [data-close]`);
+    closeElements.forEach(elem => {
+      Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(elem).click(() => {
+        Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(target).fadeOut(500);
+        document.body.style.overflow = '';
 
-  const closeElements = document.querySelectorAll('[data-close]');
-  closeElements.forEach(elem => {
-    Object(_core__WEBPACK_IMPORTED_MODULE_1__["default"])(elem).click(() => {
-      Object(_core__WEBPACK_IMPORTED_MODULE_1__["default"])('.modal').fadeOut(500);
-      document.body.style.overflow = '';
+        if (created) {
+          document.querySelector(target).remove();
+        }
+      });
     });
-  });
-  Object(_core__WEBPACK_IMPORTED_MODULE_1__["default"])('.modal').click(e => {
-    if (e.target.classList.contains('modal')) {
-      Object(_core__WEBPACK_IMPORTED_MODULE_1__["default"])('.modal').fadeOut(500);
-      document.body.style.overflow = '';
-    }
-  });
+    Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(target).click(e => {
+      if (e.target.classList.contains('modal')) {
+        Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(target).fadeOut(500);
+        document.body.style.overflow = '';
+
+        if (created) {
+          document.querySelector(target).remove();
+        }
+      }
+    });
+  }
 };
 
-Object(_core__WEBPACK_IMPORTED_MODULE_1__["default"])('[data-toggle="modal"]').modal();
+Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-toggle="modal"]').modal();
 
-_core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.createModal = function ({
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.createModal = function ({
   text,
   btns
 } = {}) {
@@ -213,8 +206,8 @@ _core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.createModal = function (
 		 `;
     modal.querySelector(".modal-footer").append(...buttons);
     document.body.appendChild(modal);
-    Object(_core__WEBPACK_IMPORTED_MODULE_1__["default"])(this[i]).modal(true);
-    Object(_core__WEBPACK_IMPORTED_MODULE_1__["default"])(this[i].getAttribute('data-target')).fadeIn(500);
+    Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).modal(true);
+    Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i].getAttribute('data-target')).fadeIn(500);
   }
 };
 
@@ -694,30 +687,21 @@ $('button').eq(2).on('click', () => {
 // 	</div>
 // 	`);
 // 	$('.dropdown-toggle').dropdown();
-// $('#trigger').click(() => $('#trigger').createModal({
-// 	text: {
-// 		title: 'modal title',
-// 		body: 'modal body'
-// 	},
-// 	btns: {
-// 		count: 2,
-// 		settings: [
-// 			[
-// 				'Close',
-// 				['btn-danger', 'mr-10'],
-// 				true
-// 			],
-// 			[
-// 				'Save changes',
-// 				['btn-success'],
-// 				false,
-// 				() => {
-// 					alert('complete');
-// 				}
-// 			]
-// 		]
-// 	}
-// }));
+
+$('#trigger').click(() => $('#trigger').createModal({
+  text: {
+    title: 'modal title',
+    body: 'modal body'
+  },
+  btns: {
+    count: 3,
+    settings: [['Close', ['btn-danger', 'mr-10'], true], ['Save changes', ['btn-success'], false, () => {
+      alert('complete');
+    }], ['Another btn', ['btn-warning', 'ml-10'], false, () => {
+      alert('complete 2');
+    }]]
+  }
+}));
 
 /***/ })
 

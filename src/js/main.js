@@ -32,7 +32,7 @@ $('#trigger').click(() => $('#trigger').createModal({
 		body: 'modal body'
 	},
 	btns: {
-		count: 2,
+		count: 3,
 		settings: [
 			[
 				'Close',
@@ -45,6 +45,14 @@ $('#trigger').click(() => $('#trigger').createModal({
 				false,
 				() => {
 					alert('complete');
+				}
+			],
+			[
+				'Another btn',
+				['btn-warning', 'ml-10'],
+				false,
+				() => {
+					alert('complete 2');
 				}
 			]
 		]
